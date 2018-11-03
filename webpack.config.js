@@ -1,12 +1,15 @@
+
+const path = require('path');
+
 //处理html模板
-var htmlWebpackPlugin = require('html-webpack-plugin');
+let htmlWebpackPlugin = require('html-webpack-plugin');
 //处理共用、通用的js
-var webpack = require('webpack');
+let webpack = require('webpack');
 //css单独打包
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // 获取html-webpack-plugin参数的方法
-var getHtmlConfig = function(name, title) {
+let getHtmlConfig = function(name, title) {
 	return {
 		template: './src/view/' + name + '.html',
 		filename: 'view/' + name + '.html',
@@ -33,6 +36,17 @@ module.exports = {
 	//将外部变量或者模块加载进来
 	externals: {
 		jquery: 'window.jQuery',
+	},
+	resolve: {
+		//配置好路径之后  在js中引用文件可以缩写
+		alias: {
+			node_modules:path.resolve(__dirname, 'node_modules'),
+			page: path.resolve(__dirname, 'src/page'),
+			view: path.resolve(__dirname, 'src/view'),
+			util: path.resolve(__dirname, 'src/util'),
+			service: path.resolve(__dirname, 'src/service'),
+			image: path.resolve(__dirname, 'src/image'),
+		},
 	},
 	module: {
 		loaders: [
@@ -83,18 +97,31 @@ module.exports = {
 					],
 				}),
 			},
-			{
-				test: /\.(png|jpg|gif)$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 8192,
-							name: 'images/[name].[ext]',
-						},
-					},
-				],
-			},
+			 // 图片的配置
+			 {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            // loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
+            loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
+            options: {
+              name: "./images"
+            }
+          }
+        ]
+      },
+       // 字体图标的配置
+       {
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+        use: [
+          {
+						loader: "url-loader?limit=8192&name=font/[hash:8].[name].[ext]",
+            options: {
+              name: "./font"
+            }
+          }
+        ]
+      }
 		],
 	},
 	plugins: [
