@@ -1,15 +1,18 @@
+/*
+ * @Author: Jerrychan
+ * @Date: 2018-10-29 14:01:27
+ * @LastEditors: Jerrychan
+ * @LastEditTime: 2018-10-29 14:04:45
+ * @Description: 这是webpack配置文件
+ */
 
 const path = require('path');
-
-//处理html模板
-let htmlWebpackPlugin = require('html-webpack-plugin');
-//处理共用、通用的js
-let webpack = require('webpack');
-//css单独打包
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // 获取html-webpack-plugin参数的方法
-let getHtmlConfig = function(name, title) {
+var getHtmlConfig = function(name, title) {
 	return {
 		template: './src/view/' + name + '.html',
 		filename: 'view/' + name + '.html',
@@ -21,8 +24,10 @@ let getHtmlConfig = function(name, title) {
 	};
 };
 
+let WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev';
+console.log(WEBPACK_ENV);
 module.exports = {
-	//    entry: './src/app.js',
+	// entry: "./src/page/index/index.js",
 	entry: {
 		//通用模块
 		common: ['./src/page/common/index.js'],
@@ -30,12 +35,12 @@ module.exports = {
 		index: ['./src/page/index/index.js'],
 	},
 	output: {
-		path: __dirname + '/dist',
-		filename: 'js/[name].js',
+		path: path.resolve(__dirname, 'dist'),
+		publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//mall.52react.cn/',
+		filename: 'js/[name].js'//必须[name] 不然冲突文件名一样
 	},
-	//将外部变量或者模块加载进来
 	externals: {
-		jquery: 'window.jQuery',
+		jquery: 'jQuery', //如果要全局引用jQuery，不管你的jQuery有没有支持模块化，用externals就对了。
 	},
 	resolve: {
 		//配置好路径之后  在js中引用文件可以缩写
@@ -49,94 +54,74 @@ module.exports = {
 		},
 	},
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
-				//以下目录不处理
-				exclude: /node_modules/,
-				//只处理以下目录
-				include: /src/,
-				loader: 'babel-loader',
-				//配置的目标运行环境（environment）自动启用需要的 babel 插件
-				query: {
-					presets: ['env', 'react'],
+				exclude: /(node_modules)/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['env', 'react'],
+					},
 				},
 			},
-			//css 处理这一块
+			// css文件的处理
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: [
-						//'style-loader',
-						{
-							loader: 'css-loader',
-							options: {
-								//支持@important引入css
-								importLoaders: 1,
-							},
-						}
-					],
+					use: 'css-loader',
 				}),
 			},
-			//less 处理这一块
+			// sass文件的处理
 			{
 				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: [
-						//'style-loader',
-						{
-							loader: 'css-loader',
-							options: {
-								//支持@important引入css
-								importLoaders: 1,
-							},
-						},
-						'less-loader',
-					],
+					use: ['css-loader', 'less-loader'],
 				}),
 			},
-			 // 图片的配置
-			 {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            // loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
-            loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
-            options: {
-              name: "./images"
-            }
-          }
-        ]
-      },
-       // 字体图标的配置
-       {
-        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
-        use: [
-          {
-						loader: "url-loader?limit=8192&name=font/[hash:8].[name].[ext]",
-            options: {
-              name: "./font"
-            }
-          }
-        ]
-      }
+		 // 图片的配置
+		 {
+			test: /\.(png|jpg|gif)$/,
+			use: [
+				{
+					// loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
+					loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
+					options: {
+						name: "./images"
+					}
+				}
+			]
+		},
+		 // 字体图标的配置
+		 {
+			test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+			use: [
+				{
+					loader: "url-loader?limit=8192&name=font/[hash:8].[name].[ext]",
+					options: {
+						name: "./font"
+					}
+				}
+			]
+		}
 		],
 	},
 	plugins: [
-	
-		new htmlWebpackPlugin(getHtmlConfig('index', '首页')),
-		new htmlWebpackPlugin(getHtmlConfig('login', '登录页')),
-		// 独立通用模块到js/common.js
-		new webpack.optimize.CommonsChunkPlugin({
-			//公共块的块名称
-			name: 'common',
-			//生成的文件名
-			filename: 'js/common.js',
-		}),
-		//css 单独打包到文件
+		// 处理html文件
+		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
+		new HtmlWebpackPlugin(getHtmlConfig('login', '登录页')),
+		// new HtmlWebpackPlugin({
+		// 	template: './src/view/index.html',
+		// }),
+		// 独立css文件
 		new ExtractTextPlugin('css/[name].css'),
+		// 提出公共模块
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'common',
+			filename: 'js/base.js',
+		}),
 	],
 	devServer: {
 		port: 8086,
@@ -149,10 +134,10 @@ module.exports = {
 				target: 'http://happymmall.com', //选择请求代理
 				changeOrigin: true,
 			},
-		// 	// "/user/logout.do": {
-		// 	//   target: "http://admintest.happymmall.com",
-		// 	//   changeOrigin: true
-		// 	// }
-		 },
-	}
+			// "/user/logout.do": {
+			//   target: "http://admintest.happymmall.com",
+			//   changeOrigin: true
+			// }
+		},
+	},
 };

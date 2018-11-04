@@ -6,7 +6,7 @@
 */
 
 'use strict';
-var Hogan = require('hogan');
+var hogan = require('hogan.js');
 var conf = {
     serverHost : ''
 };
@@ -50,7 +50,7 @@ var _mm = {
     },
     // 渲染html模板
     renderHtml : function(htmlTemplate, data){
-        var template    = Hogan.compile(htmlTemplate),
+        var template    = hogan.compile(htmlTemplate),
             result      = template.render(data);
         return result;
     },

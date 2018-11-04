@@ -7,17 +7,8 @@
  */
 
  'use strict'
-//  const _mm = require('util/mm.js');
+ const _mm = require('util/mm.js');
 
-//  _mm.request({
-//      url:'/product/list.do?keyword=1',
-//      success:function(res) {
-//        console.log(res);
-//      },
-//      error:function(res) {
-//        console.log(res);
-//      }
-//  })
-//  const $$ = require("jquery");
+require('page/common/nav/index.js');
+require('page/common/nav-simple/index.js');
  console.log('hello index123');
-//  $$('body').html('hello jquery123');
