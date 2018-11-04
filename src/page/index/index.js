@@ -9,6 +9,8 @@
  'use strict'
  const _mm = require('util/mm.js');
 
-require('page/common/nav/index.js');
-require('page/common/nav-simple/index.js');
+
+ require('page/common/nav/index.js');
+require('page/common/header/index.js');
+// require('page/common/nav-simple/index.js');
  console.log('hello index123');
