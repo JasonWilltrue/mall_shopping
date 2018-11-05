@@ -37,7 +37,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//mall.52react.cn/',
-		filename: 'js/[name].js'//必须[name] 不然冲突文件名一样
+		filename: 'js/[name].js', //必须[name] 不然冲突文件名一样
 	},
 	externals: {
 		jquery: 'jQuery', //如果要全局引用jQuery，不管你的jQuery有没有支持模块化，用externals就对了。
@@ -45,7 +45,7 @@ module.exports = {
 	resolve: {
 		//配置好路径之后  在js中引用文件可以缩写
 		alias: {
-			node_modules:path.resolve(__dirname, 'node_modules'),
+			node_modules: path.resolve(__dirname, 'node_modules'),
 			page: path.resolve(__dirname, 'src/page'),
 			view: path.resolve(__dirname, 'src/view'),
 			util: path.resolve(__dirname, 'src/util'),
@@ -81,31 +81,40 @@ module.exports = {
 					use: ['css-loader', 'less-loader'],
 				}),
 			},
-		 // 图片的配置
-		 {
-			test: /\.(png|jpg|gif)$/,
-			use: [
-				{
-					// loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
-					loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
-					options: {
-						name: "./images"
-					}
-				}
-			]
-		},
-		 // 字体图标的配置
-		 {
-			test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
-			use: [
-				{
-					loader: "url-loader?limit=8192&name=font/[hash:8].[name].[ext]",
-					options: {
-						name: "./font"
-					}
-				}
-			]
-		}
+			// string
+			{
+				test: /\.string$/,
+				use: [
+					{
+						loader: 'html-loader',
+					},
+				],
+			},
+			// 图片的配置
+			{
+				test: /\.(png|jpg|gif)$/,
+				use: [
+					{
+						// loader: "url-loader?limit=8192&name=images/[hash:8].[name].[ext]",
+						loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
+						options: {
+							name: './images',
+						},
+					},
+				],
+			},
+			// 字体图标的配置
+			{
+				test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+				use: [
+					{
+						loader: 'url-loader?limit=8192&name=font/[hash:8].[name].[ext]',
+						options: {
+							name: './font',
+						},
+					},
+				],
+			},
 		],
 	},
 	plugins: [

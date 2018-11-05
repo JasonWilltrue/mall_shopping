@@ -9,9 +9,13 @@
  'use strict'
  const _mm = require('util/mm.js');
 
-
+require('./index.css');
  require('page/common/nav/index.js');
- require('page/common/nav-side/index.js');
+
+
+ var navSide = require('page/common/nav-side/index.js');
 require('page/common/header/index.js');
+
+navSide.init({name:'user-pass-update'});
 // require('page/common/nav-simple/index.js');
  console.log('hello index123');

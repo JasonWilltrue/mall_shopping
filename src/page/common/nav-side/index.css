@@ -1,9 +1,11 @@
 .nav-side{
    float: left;
    width:130px;
+    /* 给你了最小高度 这样就不会一闪没有渲染出来的时候 右边div挤过来 */
+   min-height: 100px;
+ 
 }
 .nav-side .nav-item{
-   
     line-height: 25px;
     font-size: 13px;
 }
@@ -13,6 +15,7 @@
 .nav-side .nav-item.active .link{
    color: #c60023;
 }
+/* 轮播图 */
 .content.with-nav{
   float: left;
   width:950px;
