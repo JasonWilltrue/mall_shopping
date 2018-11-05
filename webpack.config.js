@@ -150,6 +150,14 @@ module.exports = {
 			"/user/login.do": {
 			  target: "http://happymmall.com",
 			  changeOrigin: true
+			},
+			"/user/check_valid.do": {
+			  target: "http://happymmall.com",
+			  changeOrigin: true
+			},
+			"/user/register.do": {
+			  target: "http://happymmall.com",
+			  changeOrigin: true
 			}
 		},
 	},
