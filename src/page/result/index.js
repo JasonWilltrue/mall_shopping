@@ -17,4 +17,10 @@ $(function(){
         $element    = $('.' + type + '-success');
     // 显示对应的提示元素
     $element.show();
+    //根据订单下一步的逻辑  如果订单 继续购物 还是回到购物车
+    if (true) {
+      
+    } else {
+      
+    }
 })
