@@ -33,6 +33,7 @@ module.exports = {
 		common: ['./src/page/common/index.js'],
 		login: ['./src/page/login/index.js'],
 		index: ['./src/page/index/index.js'],
+		result: ['./src/page/result/index.js'],
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -121,6 +122,7 @@ module.exports = {
 		// 处理html文件
 		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
 		new HtmlWebpackPlugin(getHtmlConfig('login', '登录页')),
+		new HtmlWebpackPlugin(getHtmlConfig('result', '搜索结果')),
 		// new HtmlWebpackPlugin({
 		// 	template: './src/view/index.html',
 		// }),
