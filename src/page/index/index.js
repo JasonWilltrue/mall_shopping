@@ -16,6 +16,7 @@ require('./index.css');
  var navSide = require('page/common/nav-side/index.js');
 require('page/common/header/index.js');
 
+
 navSide.init({name:'user-pass-update'});
 // require('page/common/nav-simple/index.js');
  console.log('hello index123');
