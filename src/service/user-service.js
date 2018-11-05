@@ -3,7 +3,7 @@
  * @Date: 2018-11-05 12:38:25
  * @LastEditors: Jerrychan
  * @LastEditTime: 2018-11-05 12:44:30
- * @Description: 用户提交表单请求
+ * @Description: 路由控制界面
  */
 
 'use strict';

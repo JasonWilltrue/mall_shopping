@@ -34,7 +34,10 @@ module.exports = {
 		'user-login': ['./src/page/user-login/index.js'],
 		'user-register': ['./src/page/user-register/index.js'],
 		'user-pass-reset': ['./src/page/user-pass-reset/index.js'],
+		'user-center': ['./src/page/user-center/index.js'],
+		'user-center-update': ['./src/page/user-center-update/index.js'],
 		'index': ['./src/page/index/index.js'],
+		'list': ['./src/page/list/index.js'],
 		'result': ['./src/page/result/index.js'],
 	},
 	output: {
@@ -124,8 +127,11 @@ module.exports = {
 		// 处理html文件
 		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-login', '登录页')),
+		new HtmlWebpackPlugin(getHtmlConfig('list', '商品列表页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-register', '注册页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', '找回密码')),
+		new HtmlWebpackPlugin(getHtmlConfig('user-center', '个人中心')),
+		new HtmlWebpackPlugin(getHtmlConfig('user-center-update', '修改个人中心')),
 		new HtmlWebpackPlugin(getHtmlConfig('result', '搜索结果')),
 		// new HtmlWebpackPlugin({
 		// 	template: './src/view/index.html',
@@ -149,19 +155,7 @@ module.exports = {
 				target: 'http://happymmall.com', //选择请求代理
 				changeOrigin: true,
 			},
-			"/user/login.do": {
-			  target: "http://happymmall.com",
-			  changeOrigin: true
-			},
-			"/user/check_valid.do": {
-			  target: "http://happymmall.com",
-			  changeOrigin: true
-			},
-			"/user/register.do": {
-			  target: "http://happymmall.com",
-			  changeOrigin: true
-			},
-			"/user/get_user_info.do": {
+			"/user/*": {
 			  target: "http://happymmall.com",
 			  changeOrigin: true
 			}
