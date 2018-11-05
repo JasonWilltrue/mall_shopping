@@ -33,6 +33,7 @@ module.exports = {
 		'common': ['./src/page/common/index.js'],
 		'user-login': ['./src/page/user-login/index.js'],
 		'user-register': ['./src/page/user-register/index.js'],
+		'user-pass-reset': ['./src/page/user-pass-reset/index.js'],
 		'index': ['./src/page/index/index.js'],
 		'result': ['./src/page/result/index.js'],
 	},
@@ -124,6 +125,7 @@ module.exports = {
 		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-login', '登录页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-register', '注册页')),
+		new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', '找回密码')),
 		new HtmlWebpackPlugin(getHtmlConfig('result', '搜索结果')),
 		// new HtmlWebpackPlugin({
 		// 	template: './src/view/index.html',
@@ -156,6 +158,10 @@ module.exports = {
 			  changeOrigin: true
 			},
 			"/user/register.do": {
+			  target: "http://happymmall.com",
+			  changeOrigin: true
+			},
+			"/user/get_user_info.do": {
 			  target: "http://happymmall.com",
 			  changeOrigin: true
 			}
