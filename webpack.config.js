@@ -32,6 +32,7 @@ module.exports = {
 		//通用模块
 		'common': ['./src/page/common/index.js'],
 		'user-login': ['./src/page/user-login/index.js'],
+		'user-register': ['./src/page/user-register/index.js'],
 		'index': ['./src/page/index/index.js'],
 		'result': ['./src/page/result/index.js'],
 	},
@@ -122,6 +123,7 @@ module.exports = {
 		// 处理html文件
 		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-login', '登录页')),
+		new HtmlWebpackPlugin(getHtmlConfig('user-register', '注册页')),
 		new HtmlWebpackPlugin(getHtmlConfig('result', '搜索结果')),
 		// new HtmlWebpackPlugin({
 		// 	template: './src/view/index.html',
@@ -145,10 +147,10 @@ module.exports = {
 				target: 'http://happymmall.com', //选择请求代理
 				changeOrigin: true,
 			},
-			// "/user/logout.do": {
-			//   target: "http://admintest.happymmall.com",
-			//   changeOrigin: true
-			// }
+			"/user/login.do": {
+			  target: "http://happymmall.com",
+			  changeOrigin: true
+			}
 		},
 	},
 };
