@@ -31,7 +31,7 @@ module.exports = {
 	entry: {
 		//通用模块
 		common: ['./src/page/common/index.js'],
-		login: ['./src/page/login/index.js'],
+		login: ['./src/page/user-login/index.js'],
 		index: ['./src/page/index/index.js'],
 		result: ['./src/page/result/index.js'],
 	},
