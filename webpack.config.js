@@ -38,6 +38,7 @@ module.exports = {
 		'user-center-update': ['./src/page/user-center-update/index.js'],
 		'index': ['./src/page/index/index.js'],
 		'list': ['./src/page/list/index.js'],
+		'detail': ['./src/page/detail/index.js'],
 		'result': ['./src/page/result/index.js'],
 	},
 	output: {
@@ -128,6 +129,7 @@ module.exports = {
 		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-login', '登录页')),
 		new HtmlWebpackPlugin(getHtmlConfig('list', '商品列表页')),
+		new HtmlWebpackPlugin(getHtmlConfig('detail', '商品详情页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-register', '注册页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', '找回密码')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-center', '个人中心')),
@@ -146,19 +148,19 @@ module.exports = {
 	],
 	devServer: {
 		port: 8086,
-		historyApiFallback: {
-			index: '/dist/view/index.html', //404 或招不到则返回首页
-		},
+		// historyApiFallback: {
+		// 	index: '/dist/view/index.html', //404 或招不到则返回首页
+		// },
 		open: true, //自动打开浏览器
-		proxy: {
-			'/product/list.do': {
-				target: 'http://happymmall.com', //选择请求代理
-				changeOrigin: true,
-			},
-			"/user/*": {
-			  target: "http://happymmall.com",
-			  changeOrigin: true
-			}
-		},
+		// proxy: {
+		// 	'/product/list.do': {
+		// 		target: 'http://happymmall.com', //选择请求代理
+		// 		changeOrigin: true,
+		// 	},
+		// 	"/user/*": {
+		// 	  target: "http://happymmall.com",
+		// 	  changeOrigin: true
+		// 	}
+		// },
 	},
 };

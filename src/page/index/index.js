@@ -1,22 +1,30 @@
 /*
- * @Author: Jerrychan
- * @Date: 2018-11-02 23:12:00
- * @LastEditors: Jerrychan
- * @LastEditTime: 2018-11-02 23:12:04
- * @Description: 这里填写页面信息
- */
+* @Author: Rosen
+* @Date:   2017-05-08 15:19:12
+* @Last Modified by:   Rosen
+* @Last Modified time: 2017-05-26 19:36:18
+*/
 
- 'use strict'
- const _mm = require('util/mm.js');
-
+'use strict';
 require('./index.css');
- require('page/common/nav/index.js');
-
-
- var navSide = require('page/common/nav-side/index.js');
+require('page/common/nav/index.js');
 require('page/common/header/index.js');
+// require('util/slider/index.js');
+var navSide         = require('page/common/nav-side/index.js');
+// var templateBanner  = require('./banner.string');
+var _mm             = require('util/mm.js');
 
-
-navSide.init({name:'user-pass-update'});
-// require('page/common/nav-simple/index.js');
- console.log('hello index123');
+// $(function() {
+//     // 渲染banner的html
+//     var bannerHtml  = _mm.renderHtml(templateBanner);
+//     $('.banner-con').html(bannerHtml);
+//     // 初始化banner
+//     var $slider     = $('.banner').unslider({
+//         dots: true
+//     });
+//     // 前一张和后一张操作的事件绑定
+//     $('.banner-con .banner-arrow').click(function(){
+//         var forward = $(this).hasClass('prev') ? 'prev' : 'next';
+//         $slider.data('unslider')[forward]();
+//     });
+// });

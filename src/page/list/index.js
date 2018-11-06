@@ -11,8 +11,8 @@ require('page/common/nav/index.js');
 require('page/common/header/index.js');
 var _mm             = require('util/mm.js');
 var _product        = require('service/product-service.js');
-// var Pagination      = require('util/pagination/index.js');
-// var templateIndex   = require('./index.string');
+var Pagination      = require('util/pagination/index.js');
+var templateIndex   = require('./index.string');
 
 var page = {
     data : {
@@ -72,18 +72,20 @@ var page = {
     loadList : function(){
         var _this       = this,
             listHtml    = '',
-            listParam   = this.data.listParam,
+            listParam   = this.data.listParam,  //全局缓存对象
             $pListCon   = $('.p-list-con');
         $pListCon.html('<div class="loading"></div>');
         // 删除参数中不必要的字段
         listParam.categoryId 
             ? (delete listParam.keyword) : (delete listParam.categoryId);
         // 请求接口
+        console.log(listParam);
         _product.getProductList(listParam, function(res){
             listHtml = _mm.renderHtml(templateIndex, {
                 list :  res.list
             });
-            $pListCon.html(listHtml);
+            $pListCon.html(listHtml); //放入容器
+            // 加载分页信息
             _this.loadPagination({
                 hasPreviousPage : res.hasPreviousPage,
                 prePage         : res.prePage,
@@ -97,17 +99,18 @@ var page = {
         });
     },
     // 加载分页信息
-    // loadPagination : function(pageInfo){
-    //     var _this = this;
-    //     this.pagination ? '' : (this.pagination = new Pagination());
-    //     this.pagination.render($.extend({}, pageInfo, {
-    //         container : $('.pagination'),
-    //         onSelectPage : function(pageNum){
-    //             _this.data.listParam.pageNum = pageNum;
-    //             _this.loadList();
-    //         }
-    //     }));
-    // }
+    loadPagination : function(pageInfo){
+        var _this = this;
+        //判断是否已经new过
+        this.pagination ? '' : (this.pagination = new Pagination());
+        this.pagination.render($.extend({}, pageInfo, {
+            container : $('.pagination'),
+            onSelectPage : function(pageNum){
+                _this.data.listParam.pageNum = pageNum;
+                _this.loadList();
+            }
+        }));
+    }
 };
 $(function(){
     page.init();
