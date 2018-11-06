@@ -40,31 +40,13 @@ var nav = {
     // 加载用户信息
     loadUserInfo : function(){
        console.log('加载用户信息');
-       
-       let res = {answer: "一二三",
-       createTime: 1541402870000,
-       email: "148373644@qq.com",
-       id: 8608,
-       password: "",
-       phone: "13012345678",
-       question: "一二三",
-       role: 0,
-       updateTime: 1541402870000,
-       username: "testv1"
-       }
-       $('.user.not-login').hide().siblings('.user.login').show()
-                .find('.username').text(res.username);
-
-
-
-        // _user.checkLogin(function(res){
-        //     console.log(res);
-              
-            
-        // }, function(errMsg){
-        //     console.log(errMsg);
-						
-        // });
+        _user.checkLogin(function(res){
+            console.log(res);
+            $('.user.not-login').hide().siblings('.user.login').show()
+            .find('.username').text(res.username);
+        }, function(errMsg){
+            console.log(errMsg);
+        });
     },
     
     // 加载购物车数量

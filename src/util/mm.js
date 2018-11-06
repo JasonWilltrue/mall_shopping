@@ -10,6 +10,8 @@ var hogan = require('hogan.js');
 var conf = {
     serverHost : ''
 };
+var str = sessionStorage.getItem("mmall_login_token");
+console.log('session:  '+document.cookie);
 var _mm = {
     // 网络请求
     request : function(param){
@@ -19,6 +21,10 @@ var _mm = {
             url         : param.url     || '',
             dataType    : param.type    || 'json',
             data        : param.data    || '',
+            xhrFields: {
+                withCredentials: true
+             },
+             crossDomain: true,
             success     : function(res){
                 // 请求成功
                 if(0 === res.status){

@@ -152,6 +152,14 @@ module.exports = {
 		// 	index: '/dist/view/index.html', //404 或招不到则返回首页
 		// },
 		open: true, //自动打开浏览器
+			inline: true,
+			proxy : {
+					'**/*.do' : {
+							target: 'http://test.happymmall.com',
+							changeOrigin : true
+					}
+			}
+
 		// proxy: {
 		// 	'/product/list.do': {
 		// 		target: 'http://happymmall.com', //选择请求代理
