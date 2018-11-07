@@ -30,17 +30,18 @@ module.exports = {
 	// entry: "./src/page/index/index.js",
 	entry: {
 		//通用模块
-		'common': ['./src/page/common/index.js'],
+		common: ['./src/page/common/index.js'],
 		'user-login': ['./src/page/user-login/index.js'],
 		'user-register': ['./src/page/user-register/index.js'],
 		'user-pass-reset': ['./src/page/user-pass-reset/index.js'],
 		'user-center': ['./src/page/user-center/index.js'],
 		'user-center-update': ['./src/page/user-center-update/index.js'],
-		'index': ['./src/page/index/index.js'],
-		'list': ['./src/page/list/index.js'],
-		'detail': ['./src/page/detail/index.js'],
-		'cart': ['./src/page/cart/index.js'],
-		'result': ['./src/page/result/index.js'],
+		index: ['./src/page/index/index.js'],
+		list: ['./src/page/list/index.js'],
+		detail: ['./src/page/detail/index.js'],
+		cart: ['./src/page/cart/index.js'],
+		'order-confirm': ['./src/page/order-confirm/index.js'],
+		result: ['./src/page/result/index.js'],
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -126,6 +127,9 @@ module.exports = {
 		],
 	},
 	plugins: [
+		/**
+		 * 多页面处理方式
+		 */
 		// 处理html文件
 		new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
 		new HtmlWebpackPlugin(getHtmlConfig('user-login', '登录页')),
@@ -137,6 +141,10 @@ module.exports = {
 		new HtmlWebpackPlugin(getHtmlConfig('user-center-update', '修改个人中心')),
 		new HtmlWebpackPlugin(getHtmlConfig('result', '搜索结果')),
 		new HtmlWebpackPlugin(getHtmlConfig('cart', '购物车')),
+		new HtmlWebpackPlugin(getHtmlConfig('order-confirm', '订单确认页')),
+		/**
+		 * 单页面处理方式
+		 */
 		// new HtmlWebpackPlugin({
 		// 	template: './src/view/index.html',
 		// }),
