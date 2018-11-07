@@ -20,8 +20,9 @@ var page = {
         productId : _mm.getUrlParam('productId') || '',
     },
     init : function(){
-        this.onLoad();
-        this.bindEvent();
+        this.onLoad();  //初始化事件
+        this.bindEvent();  
+        //异步加载出来页面一出来绑定事件是绑定不了的,要用事件代理  
     },
     onLoad : function(){
         // 如果没有传productId, 自动跳回首页
@@ -72,21 +73,27 @@ var page = {
         $pageWrap.html('<div class="loading"></div>');
         // 请求detail信息
         _product.getProductDetail(this.data.productId, function(res){
+            console.log('使用前: '+res.subImages);
             _this.filter(res);
+            console.log('使用后: '+res.subImages);
             // 缓存住detail的数据
             _this.data.detailInfo = res;
+            console.log('数据:'+ JSON.stringify(res));
+            
             // render
             html = _mm.renderHtml(templateIndex, res);
             $pageWrap.html(html);
         }, function(errMsg){
-            $pageWrap.html('<p class="err-tip">此商品太淘气，找不到了</p>');
+            $pageWrap.html('<p class="err-tip">此商品太皮，找不到了</p>');
         });
     },
-    // 数据匹配
+    // 数据匹配  引用类型直接改变类型
     filter : function(data){
         data.subImages = data.subImages.split(',');
     }
 };
+
+//页面跳转后直接调用
 $(function(){
     page.init();
 })

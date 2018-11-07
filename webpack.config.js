@@ -30,16 +30,16 @@ module.exports = {
 	// entry: "./src/page/index/index.js",
 	entry: {
 		//通用模块
-		'common': ['./src/page/common/index.js'],
+		common: ['./src/page/common/index.js'],
 		'user-login': ['./src/page/user-login/index.js'],
 		'user-register': ['./src/page/user-register/index.js'],
 		'user-pass-reset': ['./src/page/user-pass-reset/index.js'],
 		'user-center': ['./src/page/user-center/index.js'],
 		'user-center-update': ['./src/page/user-center-update/index.js'],
-		'index': ['./src/page/index/index.js'],
-		'list': ['./src/page/list/index.js'],
-		'detail': ['./src/page/detail/index.js'],
-		'result': ['./src/page/result/index.js'],
+		index: ['./src/page/index/index.js'],
+		list: ['./src/page/list/index.js'],
+		detail: ['./src/page/detail/index.js'],
+		result: ['./src/page/result/index.js'],
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -152,23 +152,12 @@ module.exports = {
 		// 	index: '/dist/view/index.html', //404 或招不到则返回首页
 		// },
 		open: true, //自动打开浏览器
-			inline: true,
-			proxy : {
-					'**/*.do' : {
-							target: 'http://test.happymmall.com',
-							changeOrigin : true
-					}
-			}
-
-		// proxy: {
-		// 	'/product/list.do': {
-		// 		target: 'http://happymmall.com', //选择请求代理
-		// 		changeOrigin: true,
-		// 	},
-		// 	"/user/*": {
-		// 	  target: "http://happymmall.com",
-		// 	  changeOrigin: true
-		// 	}
-		// },
+		inline: true,
+		proxy: {
+			'**/*.do': {
+				target: 'http://test.happymmall.com',
+				changeOrigin: true,
+			},
+		},
 	},
 };
