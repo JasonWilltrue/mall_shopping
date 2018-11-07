@@ -131,6 +131,7 @@ var addressModal = {
     //获取select框的选项，输入是一个数组：array，输出html
     getSelectOption: function (optionArray) {
         var html = '<option value="">请选择</option>';
+        //Todo: 小技巧length做缓存  优化
         for (var i = 0, length = optionArray.length; i < length; i++) {
             html += '<option value="' + optionArray[i] + '">' + optionArray[i] + '</option>';
         }

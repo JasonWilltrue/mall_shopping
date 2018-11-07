@@ -12,7 +12,7 @@ var _order          = require('service/order-service.js');
 var _address        = require('service/address-service.js');
 var templateAddress = require('./address-list.string');
 var templateProduct = require('./product-list.string');
-// var addressModal    = require('./address-modal.js');
+var addressModal    = require('./address-modal.js');
 
 var page = {
     data           : {
@@ -88,7 +88,7 @@ var page = {
         });
     },
     // 加载地址列表信息
-     loadAddressList: function () {
+      loadAddressList: function () {
         var _this = this;
         $('.address-con').html('<div class="loading"></div>');
         //获取地址列表

@@ -115,21 +115,23 @@
 .err-tip{
     height: 60px;
     line-height: 60px;
-    color: #f60;
+    color: #c60023;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
     background: #eee;
 }
 
-/* modal部分 */
+/* modal部分吧全屏覆盖 半透明效果 */
 .modal{
     position: fixed;
     top:0;
     bottom:0;
     left:0;
     right:0;
-    background: #eeeeee;
+    /* 兼容低版本浏览器 */
+    background: #eeeeee;  
+    /* 新版本 加入透明度  */
     background: rgba(0,0,0,.4);
     z-index: 1000;
     overflow-x: hidden;
@@ -139,7 +141,8 @@
     width:700px;
     margin:50px auto;
     background: #ffffff;
-    border-radius: 2px;
+    border: 1px solid #c60023;
+    border-radius: 4px;
 }
 .modal .modal-container .modal-header{
     position:relative;
